@@ -1,0 +1,5 @@
+log['time'] = log['OCC_TIM'].apply(lambda x:time.strptime(x, "%Y-%m-%d %H:%M:%S"))
+log['day'] = log['time'].apply(lambda x:x.tm_mday)
+
+log['EVT_1_count']
+EVT_1_count = log.loc[log['day']>23].groupby(['USRID'])['EVT_LBL_1'].agg({'EVT_1_count':count})
