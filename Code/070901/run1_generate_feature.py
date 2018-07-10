@@ -18,14 +18,14 @@ data_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/preprocessed_d
 train_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/train_and_test/train.csv')
 test_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/train_and_test/test.csv')
 #-------agg特征-------
-#train_agg = pd.read_csv(data_path + 'train_agg.csv')
-#test_agg = pd.read_csv(data_path + 'test_agg.csv')
-train_agg = pd.read_csv(data_path + 'train_agg.csv',nrows=500)
-test_agg = pd.read_csv(data_path + 'test_agg.csv',nrows=500)
+train_agg = pd.read_csv(data_path + 'train_agg.csv')
+test_agg = pd.read_csv(data_path + 'test_agg.csv')
+#train_agg = pd.read_csv(data_path + 'train_agg.csv',nrows=500)
+#test_agg = pd.read_csv(data_path + 'test_agg.csv',nrows=500)
 agg = pd.concat([train_agg,test_agg],copy=False)
 
-#train_flg = pd.read_csv(data_path + 'train_flg.csv')
-train_flg = pd.read_csv(data_path + 'train_flg.csv',nrows=500)
+train_flg = pd.read_csv(data_path + 'train_flg.csv')
+#train_flg = pd.read_csv(data_path + 'train_flg.csv',nrows=500)
 test_flg = pd.DataFrame(test_agg['USRID'])
 test_flg['FLAG'] = -1
 flg = pd.concat([train_flg,test_flg],copy=False)
@@ -33,10 +33,10 @@ flg = pd.concat([train_flg,test_flg],copy=False)
 data = pd.merge(flg,agg,on=['USRID'],how='left',copy=False)
 
 #-------log特征-------
-#train_log = pd.read_csv(data_path + 'train_log.csv')
-#test_log = pd.read_csv(data_path + 'test_log.csv')
-train_log = pd.read_csv(data_path + 'train_log.csv',nrows=500)
-test_log = pd.read_csv(data_path + 'test_log.csv',nrows=500)
+train_log = pd.read_csv(data_path + 'train_log.csv')
+test_log = pd.read_csv(data_path + 'test_log.csv')
+#train_log = pd.read_csv(data_path + 'train_log.csv',nrows=500)
+#test_log = pd.read_csv(data_path + 'test_log.csv',nrows=500)
 log = pd.concat([train_log,test_log],copy=False)
 #点击模块特征
 #log = log.head(20)
@@ -134,7 +134,7 @@ data = pd.merge(data,everyday_count,on=['USRID'],how='left',copy=False)
 data = pd.merge(data,everyhour_count,on=['USRID'],how='left',copy=False)
 data = pd.merge(data,most_EVT_day,on=['USRID'],how='left',copy=False)
 data = pd.merge(data,TYP_count,on=['USRID'],how='left',copy=False)
-data = data.fillna(0) #特定列fillna，有些列不需要
+#data = data.fillna(0) #特定列fillna，有些列不需要
 
 train_data = data[data['FLAG']!=-1]
 test_data = data[data['FLAG']==-1]

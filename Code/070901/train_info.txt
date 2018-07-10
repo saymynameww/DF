@@ -1,0 +1,20 @@
+
+train_and_test - 070901fillna
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8519056578734276
+07-10-23-20_8519056578734276.csv 线上:{0.85185}
+
+train_and_test - 070901fillna
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8533354537523603
+07-10-23-30_8533354537523603.csv 线上:{0.85394}
+
+train_and_test - 070901dontfillna
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8524898594656263
+07-10-23-43_8524898594656263.csv 线上:{0.85424}
+
+train_and_test - 070901dontfillna
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8523410836497339
+07-10-23-45_8523410836497339.csv 线上:{}

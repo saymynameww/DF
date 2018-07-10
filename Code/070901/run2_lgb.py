@@ -94,7 +94,8 @@ if __name__ == "__main__":
     print('\n')
     #train_feature,train_label,test_feature,importance_threshold = feature_selection(feature_mode,R_threshold)
     #params = train_tune(train_mode)
-    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 20, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+#    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
     cv_roc = []
     cv_prediction = []
     train_cv(params)
