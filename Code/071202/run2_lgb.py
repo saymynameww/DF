@@ -25,7 +25,10 @@ def train_cv(params):
     print('All params:',params)
     skf = StratifiedKFold(n_splits=N,shuffle=False,random_state=624)
     for train_in,test_in in skf.split(train_feature,train_label):
-        X_train,X_test,y_train,y_test = train_feature.iloc[train_in],train_feature.iloc[test_in],train_label.iloc[train_in],train_label.iloc[test_in]
+        if type(train_feature)==pd.core.frame.DataFrame:
+            X_train,X_test,y_train,y_test = train_feature.iloc[train_in],train_feature.iloc[test_in],train_label.iloc[train_in],train_label.iloc[test_in]
+        elif type(train_feature)==np.ndarray:
+            X_train,X_test,y_train,y_test = train_feature[train_in],train_feature[test_in],train_label[train_in],train_label[test_in]
     
         lgb_train = lgb.Dataset(X_train, y_train)
         lgb_eval = lgb.Dataset(X_test, y_test, reference=lgb_train)
@@ -43,6 +46,28 @@ def train_cv(params):
         y_pred = gbm.predict(X_test, num_iteration=gbm.best_iteration)
         cv_roc.append(roc_auc_score(y_test,y_pred))
         cv_prediction.append(gbm.predict(test_feature, num_iteration=gbm.best_iteration))
+
+def train_no_cv(params):
+    splitPoint=75000
+    X_train=train_feature[:splitPoint]
+    X_test=train_feature[splitPoint:]
+    y_train=train_label[:splitPoint]
+    y_test=train_label[splitPoint:]
+    lgb_train = lgb.Dataset(X_train, y_train)
+    lgb_eval = lgb.Dataset(X_test, y_test, reference=lgb_train)
+
+    gbm = lgb.train(params,
+                    lgb_train,
+                    num_boost_round=10000,
+                    valid_sets=lgb_eval,
+                    verbose_eval=False,
+                    early_stopping_rounds=50)
+
+    y_pred = gbm.predict(X_test, num_iteration=gbm.best_iteration)
+    roc_score = roc_auc_score(y_test,y_pred)
+    print('roc:',roc_score)
+    np.save('lgb_result_'+str(roc_score)+'.npy',y_pred)
+    prediction = gbm.predict(test_feature, num_iteration=gbm.best_iteration)
 
 def predict_func(is_best_cv):
     if is_best_cv:
@@ -147,10 +172,11 @@ if __name__ == "__main__":
     train_feature,train_label,test_feature,test_userid = feature_selection(feature_mode,R_threshold,n_components)
     #params = train_tune(train_mode)
 #    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'max_depth': 7,'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
-    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
 #    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
     cv_roc = []
     cv_prediction = []
+    train_no_cv(params)
     train_cv(params)
     predict_func(is_best_cv) 
     sys.stdout = stdout_backup
