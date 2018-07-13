@@ -76,7 +76,7 @@ def predict_func(is_best_cv):
     plt.savefig('feature_importance.png')
     print(submit_file_name+' 线上:{}')
 
-def feature_selection(feature_mode,R_threshold):
+def feature_selection(feature_mode,R_threshold,n_components):
     train_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/train_and_test/train.csv')
     test_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/train_and_test/test.csv')
     train = pd.read_csv(train_path).fillna(0)
@@ -88,7 +88,7 @@ def feature_selection(feature_mode,R_threshold):
     test.pop('FLAG')
     if feature_mode == 1:
         print('Loading all the features and labels...')
-        if fill:
+        if is_fillna:
             print('fillna')
         else:
             print('dont fillna')
@@ -108,7 +108,7 @@ def feature_selection(feature_mode,R_threshold):
         P_threshold = 0.05
         used_feature = pearson[(pearson.P_value<=P_threshold) & ((pearson.R_value>=R_threshold)|(pearson.R_value<=-R_threshold))]
         used_cols = used_feature.Feature_name.tolist()
-        if fill:
+        if is_fillna:
             print('fillna')
         else:
             print('dont fillna')
@@ -117,6 +117,16 @@ def feature_selection(feature_mode,R_threshold):
         train_feature = train[used_cols]
         test_feature = test[used_cols]
         print('R_threshold:'+str(R_threshold)+' 特征数：'+ str(test_feature.shape[1]))
+    elif feature_mode == 3:
+        print('PCA features')
+        train_feature = train[col].values
+        test_feature = test[col].values
+        feature = np.vstack((train_feature,test_feature))
+        pca = PCA(n_components=n_components)
+        pca.fit(feature)
+        feature = pca.transform(feature)
+        train_feature = feature[:80000]
+        test_feature = feature[80000:]
     return train_feature,train_label,test_feature,test_userid
 
 if __name__ == "__main__":
@@ -125,15 +135,16 @@ if __name__ == "__main__":
     model_path = os.path.join(os.pardir,os.pardir, 'Model/')
     
     feature_mode = 1
-    fill = 0
+    is_fillna = False
     R_threshold = 0.05
-    is_best_cv = 0
+    n_components = 100
+    is_best_cv = False
     #train_mode = 2
-    show_importance = 0
+    show_importance = False
     stdout_backup = sys.stdout
-    sys.stdout = Logger("train_info.txt")
+#    sys.stdout = Logger("train_info.txt")
     print('\n')
-    train_feature,train_label,test_feature,test_userid = feature_selection(feature_mode,R_threshold)
+    train_feature,train_label,test_feature,test_userid = feature_selection(feature_mode,R_threshold,n_components)
     #params = train_tune(train_mode)
 #    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'max_depth': 7,'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
     params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
