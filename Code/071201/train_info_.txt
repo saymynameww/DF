@@ -1,0 +1,58 @@
+
+dontfillna0
+Loading Pearson important features and label...
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 80, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8567158732859512
+07-12-09-50_8567158732859512.csv 线上:{}
+
+fillna0
+Loading Pearson important features and label...
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 80, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8596445417962432
+07-12-10-02_8596445417962432.csv 线上:{}
+
+
+Loading Pearson important features and label...
+fillna
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8602800390318303
+07-12-10-20_8602800390318303.csv 线上:{}
+
+
+Loading Pearson important features and label...
+dont fillna
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:0 best_cv_roc: 0.8544525559396406
+07-12-10-28_8544525559396406.csv 线上:{}
+
+
+Loading Pearson important features and label...
+fillna
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8602800390318303
+07-12-10-32_8602800390318303.csv 线上:{}
+
+
+Loading Pearson important features and label...
+dont fillna
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:0 best_cv_roc: 0.8544525559396406
+07-12-10-28_8544525559396406.csv 线上:{}
+End time: 2018-07-12 10:28:04
+Total time: 1.38 minutes
+
+Loading Pearson important features and label...
+fillna
+R_threshold:0.05 特征数：360
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8602800390318303
+07-12-10-32_8602800390318303.csv 线上:{}
+End time: 2018-07-12 10:32:56
+Total time: 0.65 minutes
+

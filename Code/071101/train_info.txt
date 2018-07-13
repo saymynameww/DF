@@ -1,0 +1,36 @@
+
+
+Loading all the features and labels...
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
+best_cv:4 best_cv_roc: 0.8632430961425317
+07-11-23-14_8632430961425317.csv 线上:{0.86227}
+
+
+Loading all the features and labels...
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8628073313159317
+07-11-23-25_8628073313159317.csv 线上:{0.8634}
+
+PCA后300维
+Loading all the features and labels...
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8546783645210636
+07-11-23-51_8546783645210636.csv 线上:{}
+
+
+Loading all the features and labels...
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.863439814897853
+07-11-23-55_863439814897853.csv 线上:{0.86445}
+
+
+Loading all the features and labels...
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 20, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8600736923829851
+07-11-23-58_8600736923829851.csv 线上:{}
+
+
+Loading all the features and labels...
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 80, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8633810352293663
+07-12-00-10_8633810352293663.csv 线上:{}

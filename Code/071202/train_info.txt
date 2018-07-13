@@ -1,0 +1,35 @@
+
+
+Loading all the features and labels...
+dont fillna
+特征数：929
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.861493167568177
+07-12-23-41_861493167568177.csv 线上:{}
+
+
+Loading all the features and labels...
+dont fillna
+特征数：929
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'max_depth': 7, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8594974773939135
+07-12-23-45_8594974773939135.csv 线上:{}
+
+
+Loading all the features and labels...
+dont fillna
+特征数：929
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+best_cv:1 best_cv_roc: 0.8644419390628564
+07-12-23-48_8644419390628564.csv 线上:{0.85261}
+
+
+
+
+Loading all the features and labels...
+dont fillna
+特征数：929
+All params: {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+get mean cv result
+mean_cv_roc: 0.8520969750631456
+07-13-00-41_8520969750631456.csv 线上:{}

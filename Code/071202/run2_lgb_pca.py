@@ -10,12 +10,14 @@ import sys
 from datetime import datetime
 import time
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import roc_auc_score
 from scipy.stats import pearsonr
 import lightgbm as lgb
 import matplotlib.pyplot as plt
 from save_log import Logger
+from sklearn.decomposition import PCA
 
 def train_cv(params):
     N = 5
@@ -70,6 +72,8 @@ def predict_func():
 def feature_selection(feature_mode,R_threshold):
     train_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/train_and_test/train.csv')
     test_path = os.path.join(os.pardir,os.pardir,os.pardir, '1DF-data/train_and_test/test.csv')
+#    train = pd.read_csv(train_path).fillna(0)
+#    test = pd.read_csv(test_path).fillna(0)
     train = pd.read_csv(train_path)
     test = pd.read_csv(test_path)
     train.pop('USRID')
@@ -81,6 +85,7 @@ def feature_selection(feature_mode,R_threshold):
         print('Loading all the features and labels...')
         train_feature = train[col].values
         test_feature = test[col].values
+        print('特征数：'+ str(test_feature.shape[1]))
     elif feature_mode == 2:
         print('Loading Pearson important features and label...')
         pearson = []
@@ -102,16 +107,23 @@ if __name__ == "__main__":
     print('Start time:',time_start.strftime('%Y-%m-%d %H:%M:%S'))
     model_path = os.path.join(os.pardir,os.pardir, 'Model/')
     
-    feature_mode = 1
+    feature_mode = 2
     R_threshold = 0.05
     #train_mode = 2
     show_importance = 0
     stdout_backup = sys.stdout
-    sys.stdout = Logger("train_info.txt")
+#    sys.stdout = Logger("train_info.txt")
     print('\n')
     train_feature,train_label,test_feature,test_userid = feature_selection(feature_mode,R_threshold)
+    feature = np.vstack((train_feature,test_feature))
+#    pca = PCA(n_components=feature.shape[1])
+    pca = PCA(n_components=300)
+    pca.fit(feature)
+    feature = pca.transform(feature)
+    train_feature = feature[:80000]
+    test_feature = feature[80000:]
     #params = train_tune(train_mode)
-    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 80, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
 #    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
     cv_roc = []
     cv_prediction = []
