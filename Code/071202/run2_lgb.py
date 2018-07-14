@@ -89,6 +89,7 @@ def predict_func(is_best_cv):
     result = pd.DataFrame()
     result['USRID'] = list(test_userid.values)
     result['RST'] = list(best_cv_prediction)
+    np.save('total_lgb_result'+'.npy',best_cv_prediction)
     time_date = time.strftime('%m-%d-%H-%M',time.localtime(time.time()))
     submit_file_name = '%s_%s.csv'%(str(time_date),str(best_cv_roc).split('.')[1])
     result.to_csv(submit_file_name,index=False,sep='\t')
@@ -163,7 +164,7 @@ if __name__ == "__main__":
     is_fillna = False
     R_threshold = 0.05
     n_components = 100
-    is_best_cv = False
+    is_best_cv = True
     #train_mode = 2
     show_importance = False
     stdout_backup = sys.stdout
@@ -172,11 +173,11 @@ if __name__ == "__main__":
     train_feature,train_label,test_feature,test_userid = feature_selection(feature_mode,R_threshold,n_components)
     #params = train_tune(train_mode)
 #    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'max_depth': 7,'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
-    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
+    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 50, 'learning_rate': 0.01, 'feature_fraction': 0.9, 'bagging_fraction': 0.8, 'bagging_freq': 5, 'verbose': 0}
 #    params = {'boosting_type': 'gbdt', 'objective': 'binary', 'metric': {'auc'}, 'num_leaves': 32, 'learning_rate': 0.01, 'verbose': 0}
     cv_roc = []
     cv_prediction = []
-    train_no_cv(params)
+#    train_no_cv(params)
     train_cv(params)
     predict_func(is_best_cv) 
     sys.stdout = stdout_backup
